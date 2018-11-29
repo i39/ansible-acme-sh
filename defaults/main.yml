@@ -10,7 +10,7 @@ acme_sh_git_clone_dest: "/usr/local/src/acme.sh"
 acme_sh_upgrade: False
 acme_sh_uninstall: False
 
-acme_sh_account_email: ""
+acme_sh_account_email: "me@vadim.mn"
 
 acme_sh_renew_time_in_days: 30
 
@@ -45,11 +45,11 @@ acme_sh_domains: []
 
 acme_sh_apt_cache_time: 86400
 
-nginx_user:               nginx     # uid of worker process
+acme_sh_nginx_user:               nginx     # uid of worker process
 
-nginx_status:             False     # install health-checking endpoint "http://HOST:PORT/nginx_status"?
+acme_sh_nginx_status:             False     # install health-checking endpoint "http://HOST:PORT/nginx_status"?
 
-nginx_ulimit:             51200     # worker_rlimit_nofile in nginx.conf
-nginx_worker_connections: 1024      # worker_connections in nginx.conf
+acme_sh_nginx_ulimit:             51200     # worker_rlimit_nofile in nginx.conf
+acme_sh_nginx_worker_connections: 1024      # worker_connections in nginx.conf
 
-nginx_start:              True      # start the service at the end of the role?
+acme_sh_nginx_start:              True      # start the service at the end of the role?

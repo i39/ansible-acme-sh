@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
 
     # alpine: special case...
     config.vm.define "alpine" do |node|
-        node.vm.box = "maier/alpine-3.3.1-x86_64"
+        node.vm.box = "maier/alpine-3.8-x86_64"
 
         # for Alpine Linux...
         node.vm.synced_folder '.', '/vagrant', disabled: true

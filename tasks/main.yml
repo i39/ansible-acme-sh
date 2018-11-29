@@ -1,19 +1,20 @@
 ---
+  
+- name: install Python 2/3 for Alpine
+  apk:
+    name: "{{ item }}"
+  loop: ["python2", "python3"]
+  when: not acme_sh_uninstall
 
 - name: Install dependencies
   apk:
     name: "{{ item }}"
-  loop: ["cron", "git", "wget"]
+  loop: ["openssl", "openssh","git", "wget"]
   when: not acme_sh_uninstall
 
-- name: install Python 2 for Alpine
-  raw: apk add python --no-cache
-
-
-- name: install Python 3 for Alpine
-  raw: apk add python3 --no-cache
-
-
+- name: Install nginx
+  apk:
+    name: "nginx"
 
 - name: Create git clone path
   file:
@@ -238,8 +239,3 @@
   debug:
     msg: "{{ list_domains.stdout_lines }}"
   when: acme_sh_list_domains and not acme_sh_uninstall
-
-- name: delegate to APK system for installation
-  include: use-apk.yml
-  when: ansible_pkg_mgr == "apk"
-
