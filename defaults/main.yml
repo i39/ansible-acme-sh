@@ -44,3 +44,12 @@ acme_sh_default_remove: False
 acme_sh_domains: []
 
 acme_sh_apt_cache_time: 86400
+
+nginx_user:               nginx     # uid of worker process
+
+nginx_status:             False     # install health-checking endpoint "http://HOST:PORT/nginx_status"?
+
+nginx_ulimit:             51200     # worker_rlimit_nofile in nginx.conf
+nginx_worker_connections: 1024      # worker_connections in nginx.conf
+
+nginx_start:              True      # start the service at the end of the role?

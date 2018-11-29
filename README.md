@@ -44,6 +44,7 @@ webroot, nginx or Apache but nothing is set in stone.
 - Ubuntu 18.04 LTS (Bionic)
 - Debian 8 (Jessie)
 - Debian 9 (Stretch)
+- Alpine 3
 
 ## Role variables
 

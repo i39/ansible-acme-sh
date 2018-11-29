@@ -1,17 +1,37 @@
----
+sudo: true
+services:
+    - docker
 
-services: "docker"
+before_install:
+    - docker info
+    - docker version
 
-env:
-  - distro: "ubuntu1604"
-  - distro: "ubuntu1804"
-  - distro: "debian8"
-  - distro: "debian9"
+    - docker build  -f test/Dockerfile-ubuntu18.04  -t nginx_bionic   .
+    - docker build  -f test/Dockerfile-ubuntu16.04  -t nginx_xenial  .
+    - docker build  -f test/Dockerfile-debian8      -t nginx_jessie   .
+    - docker build  -f test/Dockerfile-debian9      -t nginx_stretch   .
+    - docker build  -f test/Dockerfile-alpine3      -t nginx_alpine3  .
 
 script:
-  # Download test shim.
-  - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/nickjj/d12353b5b601e33cd62fda111359957a/raw
-  - chmod +x ${PWD}/tests/test.sh
+    - docker run  -v $(pwd):/data  nginx_bionic
+    - docker run  -v $(pwd):/data  nginx_xenial
+    - docker run  -v $(pwd):/data  nginx_jessie
+    - docker run  -v $(pwd):/data  nginx_stretch
 
-  # Run tests.
-  - ${PWD}/tests/test.sh
+    - docker run  -d --name c5  -v $(pwd):/data -v /sys/fs/cgroup:/sys/fs/cgroup:ro  nginx_centos7  /usr/sbin/init
+    - sleep 10
+    - docker exec -it c5 run-test.sh
+
+    - docker run  -v $(pwd):/data  nginx_alpine3
+
+
+    - echo "==> Validating the test results..."
+    - grep '^Active connections' result-ubuntu18.04
+    - grep '^Active connections' result-ubuntu16.04
+    - grep '^Active connections' result-debian9
+    - grep '^Active connections' result-debian8
+    - grep '^Active connections' result-alpine3
+
+
+notifications:
+    webhooks: https://galaxy.ansible.com/api/v1/notifications/
