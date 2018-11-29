@@ -25,7 +25,7 @@ acme_sh_default_force_renew: False
 
 acme_sh_default_debug: False
 
-acme_sh_default_dns_provider: "dns_dgon"
+acme_sh_default_dns_provider: "dns_cf"
 acme_sh_default_dns_provider_api_keys: {}
 acme_sh_default_dns_sleep: 120
 
@@ -41,7 +41,7 @@ acme_sh_default_issue_renew_hook: ""
 
 acme_sh_default_remove: False
 
-acme_sh_domains: []
+acme_sh_domains: ["doc.i39.in", "openid.i39.in", "unf.i39.in"]
 
 acme_sh_apt_cache_time: 86400
 
